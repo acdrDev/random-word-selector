@@ -8,7 +8,7 @@ let result = document.getElementById("result"); // Label where the result will b
 // Event handler
 select.addEventListener("click", (e) => {
   e.preventDefault();
-  
+
   // Change the value of the input to a numerical value
   let wordNumbers = parseInt(wordNumbersInput.value);
 
@@ -19,13 +19,11 @@ select.addEventListener("click", (e) => {
   if (isNaN(wordNumbers) || wordNumbers === 1) {
     wordSelectorHandler(wordsSplit);
   } else {
-    if (wordNumbers > wordsSplit.length) {
+    if (wordNumbers >= wordsSplit.length) {
       result.innerHTML =
         "<p>La lista de palabras no puede ser menor al numero de palabras</p>";
     } else {
-      for (let i = 0; i < wordNumbers; i++) {
-        wordSelectorHandler(wordsSplit);
-      }
+      wordSelectorHandler(wordsSplit, wordNumbers);
     }
   }
 });
@@ -50,10 +48,15 @@ function wordSplitHandler(wordList, optionInput) {
   return wordsSplit;
 }
 
-// Receive an array of words
-function wordSelectorHandler(wordsSplit) {
-  // Random location in the array
-  let word = Math.floor(Math.random() * (wordsSplit.length - 1 + 1) + 1) - 1;
+// Receive an array of words and the word numbers
+function wordSelectorHandler(wordsSplit, wordNumbers) {
+  let wordsSplitCopy = wordsSplit;
+  for (let i = 0; i < wordNumbers; i++) {
+    // Random location in the array
+    let word = Math.floor(Math.random() * wordsSplitCopy.length);
 
-  result.innerHTML += `<p>${wordsSplit[word]}</p>`;
+    result.innerHTML += `<p>${wordsSplitCopy[word]}</p>`;
+    
+    wordsSplitCopy = wordsSplit.splice(word, 1);
+  }
 }
