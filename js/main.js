@@ -51,7 +51,7 @@ function wordSplitHandler(wordList, optionInput) {
 // Receive an array of words and the word numbers
 function wordSelectorHandler(wordsSplit, wordNumbers) {
   let wordsSplitCopy = wordsSplit;
-  for (let i = 0; i < wordNumbers; i++) {
+  for (let i = 0; i <= wordNumbers; i++) {
     // Random location in the array
     let word = Math.floor(Math.random() * wordsSplitCopy.length);
 
