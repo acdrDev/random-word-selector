@@ -21,7 +21,7 @@ select.addEventListener("click", (e) => {
   } else {
     if (wordNumbers >= wordsSplit.length) {
       result.innerHTML =
-        "<p>La lista de palabras no puede ser menor al numero de palabras</p>";
+        "<p>La lista de palabras no puede ser menor o igual al numero de palabras a seleccionar</p>";
     } else {
       wordSelectorHandler(wordsSplit, wordNumbers);
     }
@@ -49,14 +49,13 @@ function wordSplitHandler(wordList, optionInput) {
 }
 
 // Receive an array of words and the word numbers
-function wordSelectorHandler(wordsSplit, wordNumbers) {
-  let wordsSplitCopy = wordsSplit;
-  for (let i = 0; i <= wordNumbers; i++) {
+function wordSelectorHandler(wordsSplit, wordNumbers = 1) {
+  for (let i = 0; i < wordNumbers; i++) {
     // Random location in the array
-    let word = Math.floor(Math.random() * wordsSplitCopy.length);
+    let word = Math.floor(Math.random() * wordsSplit.length);
 
-    result.innerHTML += `<p>${wordsSplitCopy[word]}</p>`;
+    result.innerHTML += `<p>${wordsSplit[word]}</p>`;
     
-    wordsSplitCopy = wordsSplit.splice(word, 1);
+    wordsSplit.splice(word, 1);
   }
 }
